@@ -168,3 +168,76 @@ a[href^="#main"]:focus {
   padding: 0.5rem;
   border-radius: 6px;
 }
+
+/* Gallery grid: show full images inside uniform thumbnail boxes */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--gap);
+}
+
+/* Thumbnail wrapper (the <a> around each image) gets the border and shadow */
+.gallery a {
+  display: block;
+  border: 4px solid var(--accent);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(11,110,253,0.08);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  background: white;
+  aspect-ratio: 4/3;
+}
+.gallery a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(11,110,253,0.14);
+}
+
+/* Ensure the image always fits inside the thumbnail and is fully visible */
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Keep figure images (inline illustrations) with the bordered style */
+figure img {
+  display: inline-block;
+  border: 4px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(11,110,253,0.08);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+figure img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(11,110,253,0.14);
+}
+
+/* Lightbox2 overrides to match the site's blue theme */
+.lb-outerContainer,
+.lb-dataContainer {
+  border: 8px solid var(--accent);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(11,110,253,0.12);
+}
+.lb-image {
+  border-radius: 4px;
+}
+.lb-data {
+  background: rgba(11,110,253,0.03);
+  color: var(--text);
+}
+.lb-close,
+.lb-nav a {
+  color: var(--accent);
+}
+
+/* Improve contrast for captions and navigation */
+.lb-caption {
+  color: var(--muted);
+}
+
+/* Respect reduced motion inside the lightbox too */
+@media (prefers-reduced-motion: reduce) {
+  .lb-outerContainer, .lb-dataContainer { transition: none !important; }
+}
